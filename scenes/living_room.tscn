@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/living_room.gd" id="1_room"]
+[ext_resource type="Script" path="res://scripts/player_controller.gd" id="2_player"]
+[ext_resource type="Script" path="res://scripts/flashlight.gd" id="3_flashlight"]
+[ext_resource type="Script" path="res://scripts/room_interaction.gd" id="4_interaction"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
+radius = 0.35
+height = 1.8
+
+[node name="LivingRoom" type="Node3D"]
+script = ExtResource("1_room")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+position = Vector3(0, 0.9, 4)
+script = ExtResource("2_player")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+shape = SubResource("CapsuleShape3D_player")
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+position = Vector3(0, 0.75, 0)
+current = true
+
+[node name="Flashlight" type="SpotLight3D" parent="Player/Camera3D"]
+light_energy = 3.0
+light_color = Color(0.82, 0.9, 1, 1)
+shadow_enabled = true
+spot_range = 16.0
+spot_angle = 32.0
+script = ExtResource("3_flashlight")
+
+[node name="RoomInteraction" type="RayCast3D" parent="Player/Camera3D"]
+target_position = Vector3(0, 0, -3)
+collision_mask = 1
+script = ExtResource("4_interaction")

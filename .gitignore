@@ -6,6 +6,12 @@ bin-release/
 
 # Other files and folders
 .settings/
+.godot/
+export.cfg
+export_presets.cfg
+
+# Imported assets and editor-generated files
+*.import
 
 # Executables
 *.swf
